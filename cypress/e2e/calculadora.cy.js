@@ -1,6 +1,6 @@
 describe('Calculadora', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:3000'); // URL da sua calculadora
+      cy.visit('http://localhost:3000'); // URL da minha calculadora
     });
   
     it('soma 2 + 3 e retorna 5', () => {
