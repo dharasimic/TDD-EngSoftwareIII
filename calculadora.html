@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+    .calculadora { display: inline-block; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
+    .tela { margin-bottom: 10px; font-size: 24px; min-height: 30px; }
+    .botoes button {
+      width: 60px; height: 60px; margin: 5px; font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculadora</h1>
+  <div class="calculadora">
+    <div class="tela" data-cy="resultado">0</div>
+    <div class="botoes">
+      <button data-cy="numero-1">1</button>
+      <button data-cy="numero-2">2</button>
+      <button data-cy="numero-3">3</button>
+      <br>
+      <button data-cy="numero-4">4</button>
+      <button data-cy="numero-5">5</button>
+      <button data-cy="numero-6">6</button>
+      <br>
+      <button data-cy="numero-7">7</button>
+      <button data-cy="numero-8">8</button>
+      <button data-cy="numero-9">9</button>
+      <br>
+      <button data-cy="numero-0">0</button>
+      <button data-cy="operador-soma">+</button>
+      <button data-cy="operador-subtracao">-</button>
+      <br>
+      <button data-cy="operador-multiplicacao">*</button>
+      <button data-cy="operador-divisao">/</button>
+      <button data-cy="igual">=</button>
+      <br>
+      <button data-cy="limpar">C</button>
+    </div>
+  </div>
+
+  <script>
+    let valorAtual = '';
+    let operador = '';
+    let valorAnterior = '';
+
+    const tela = document.querySelector('[data-cy="resultado"]');
+
+    function atualizarTela(valor) {
+      tela.textContent = valor;
+    }
+
+    document.querySelectorAll('[data-cy^="numero-"]').forEach(botao => {
+      botao.addEventListener('click', () => {
+        valorAtual += botao.textContent;
+        atualizarTela(valorAtual);
+      });
+    });
+
+    document.querySelector('[data-cy="limpar"]').addEventListener('click', () => {
+      valorAtual = '';
+      valorAnterior = '';
+      operador = '';
+      atualizarTela('0');
+    });
+
+    document.querySelectorAll('[data-cy^="operador-"]').forEach(botao => {
+      botao.addEventListener('click', () => {
+        if (valorAtual === '') return;
+        operador = botao.textContent;
+        valorAnterior = valorAtual;
+        valorAtual = '';
+      });
+    });
+
+    document.querySelector('[data-cy="igual"]').addEventListener('click', () => {
+      let resultado;
+      const num1 = parseFloat(valorAnterior);
+      const num2 = parseFloat(valorAtual);
+      if (isNaN(num1) || isNaN(num2)) return;
+
+      try {
+        switch (operador) {
+          case '+': resultado = num1 + num2; break;
+          case '-': resultado = num1 - num2; break;
+          case '*': resultado = num1 * num2; break;
+          case '/':
+            if (num2 === 0) throw new Error('Erro: divisão por zero');
+            resultado = num1 / num2;
+            break;
+          default: return;
+        }
+        atualizarTela(resultado);
+        valorAtual = resultado.toString();
+        valorAnterior = '';
+        operador = '';
+      } catch (e) {
+        atualizarTela('Erro');
+      }
+    });
+  </script>
+</body>
+</html>
