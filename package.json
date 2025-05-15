@@ -1,0 +1,19 @@
+{
+  "name": "tdd",
+  "version": "1.0.0",
+  "description": "* Compreender o ciclo **Red‑Green‑Refactor** da metodologia TDD.\r * Escrever testes unitários em Java usando o framework **JUnit 5**.\r * Utilizar o **IntelliJ IDEA** como ambiente de desenvolvimento e execução de testes.\r * Implementar e validar a classe **Calculadora**.\r ---",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dharasimic/TDD-EngSoftwareIII.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dharasimic/TDD-EngSoftwareIII/issues"
+  },
+  "homepage": "https://github.com/dharasimic/TDD-EngSoftwareIII#readme"
+}
